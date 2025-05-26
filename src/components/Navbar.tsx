@@ -32,15 +32,13 @@ const Navbar = async () => {
               >
                 <button
                   type="submit"
-                  className="hover:text-gray-700 transition-colors"
+                  className="hover:text-gray-700 transition-colorse"
                 >
                   Logout
                 </button>
               </form>
 
               <Link href={`/user/${session?.user.id}`}>
-                {' '}
-                {/* Assuming user.id is what you intend for the user profile URL */}
                 <span className="font-semibold hover:text-gray-700 transition-colors">
                   {session?.user.name}
                 </span>
@@ -48,8 +46,6 @@ const Navbar = async () => {
             </>
           ) : (
             <div className="flex items-center gap-3">
-              {' '}
-              {/* Added a div to group login buttons */}
               <form
                 action={async () => {
                   'use server';
