@@ -69,7 +69,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.variable}>
         {children}
-        <Toaster />
+        <Toaster
+          position="top-right"
+          style={{ backgroundColor: 'white' }}
+          className="!bg-white !text-slate-950 !dark:bg-slate-950 !dark:text-slate-50"
+        />
       </body>
     </html>
   );
