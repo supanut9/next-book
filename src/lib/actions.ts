@@ -5,11 +5,7 @@ import { parseServerActionResponse } from './utils';
 import slugify from 'slugify';
 import { writeClient } from '@/sanity/lib/write-client';
 
-export const createPitch = async (
-  state: any,
-  form: FormData,
-  pitch: string
-) => {
+export const createPitch = async (form: FormData, pitch: string) => {
   const session = await auth();
 
   if (!session) {
@@ -54,4 +50,11 @@ export const createPitch = async (
       status: 'ERROR',
     });
   }
+};
+
+export const validateImageLink = async (imageUrl: string): Promise<boolean> => {
+  const res = await fetch(imageUrl, { method: 'HEAD' });
+  const contentType = res.headers.get('content-type');
+
+  return !!contentType?.startsWith('image/');
 };

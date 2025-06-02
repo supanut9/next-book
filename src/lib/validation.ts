@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { validateImageLink } from './actions';
 
 export const formSchema = z.object({
   title: z.string().min(3).max(100),
@@ -9,10 +10,7 @@ export const formSchema = z.object({
     .url()
     .refine(async (url) => {
       try {
-        const res = await fetch(url, { method: 'HEAD' });
-        const contentType = res.headers.get('content-type');
-
-        return contentType?.startsWith('image/');
+        return await validateImageLink(url);
       } catch {
         return false;
       }
