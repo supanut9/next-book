@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 import Google from 'next-auth/providers/google';
 import { client } from './sanity/lib/client';
-import { AUTHOR_BY_GITHUB_ID_QUERY } from './sanity/lib/queries';
+import { AUTHOR_BY_PROVIDER_ACCOUNT_ID_QUERY } from './sanity/lib/queries';
 import { writeClient } from './sanity/lib/write-client';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -13,7 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       const existingUser = await client
         .withConfig({ useCdn: false })
-        .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+        .fetch(AUTHOR_BY_PROVIDER_ACCOUNT_ID_QUERY, {
           id,
         });
 
@@ -33,7 +33,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async jwt({ token, account, profile }) {
       if (account && profile) {
-        const user = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+        const user = await client.fetch(AUTHOR_BY_PROVIDER_ACCOUNT_ID_QUERY, {
           id: account.providerAccountId,
         });
 
